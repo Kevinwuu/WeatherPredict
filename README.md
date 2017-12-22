@@ -9,9 +9,13 @@
 
 ### 使用工具
 Python 3.5.3
+
 BeautifulSoup
+
 pandas
+
 sklearn.linear_model
+
 ...
 
 ### 進度
@@ -22,11 +26,11 @@ craw_year : 爬取年報表資料。
 regression : 讀取資料畫出相關性，求regression方程式。
 
 #### 待辦
-	- dict讀進json中文亂碼，但在python下可正常顯示。
-	- 如何自動點擊，顯示隱藏的html
-	- 年報表資料key值尚未去中文
-	- 將日報表資料作合併。
-	- regression到底有沒有相關性@@
+* dict讀進json中文亂碼，但在python下可正常顯示。
+* 如何自動點擊，顯示隱藏的html
+* 年報表資料key值尚未去中文
+* 將日報表資料作合併。
+* regression到底有沒有相關性@@
 
 
 #### 參考資料網站
