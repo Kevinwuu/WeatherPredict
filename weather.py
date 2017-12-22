@@ -5,7 +5,8 @@ import re
 import os
 
 
-def rain():
+# 抓降雨機率
+def get_rain():
     url = "https://weather.com/zh-TW/weather/hourbyhour/l/TWXX0021:1:TW"
     response = requests.get(url)
 
@@ -19,23 +20,22 @@ def rain():
     # 讀取整張表格
     table = soup.find(id='twc-scrollabe').table.tbody
 
-    # weather = {}
     rows = table.find_all('tr')
     # print(rows)
-    # 找到所有兄弟節點來遍歷
-    map = soup.find('div', id='map').next_siblings
-    for m in map:
-        name = m['class'][0]
-        if name == 'todaymap__timestamp':
-            date = m.text
-            # print(m.text)
 
-        # else:
-            # print(m['class'], '\n')
-            # print("none")
+    # 找到所有兄弟節點來遍歷
+    # map = soup.find('div', id='map').next_siblings
+    # for m in map:
+    #     name = m['class'][0]
+    #     if name == 'todaymap__timestamp':
+    #         date = m.text
+    #     print(m.text)
+
+    # else:
+    #     print(m['class'], '\n')
+    #     print("none")
     rain = []
 
-    # btn = soup.find(id='twc-scrollabe').find('div', 'ls-display-control').button
     for r in rows:
         # 找到降雨量欄位
         precip = r.find('td', 'precip').div.find('span', '').span.text
@@ -46,7 +46,8 @@ def rain():
     return rain
 
 
-def read_data(month, day):
+# 抓降雨因素資料
+def get_data(month, day):
     url = 'http://e-service.cwb.gov.tw/HistoryDataQuery/DayDataController.do?command=viewMain&station=466900&stname=%25E6%25B7%25A1%25E6%25B0%25B4&datepicker='
 
     # 要讀取的日期
@@ -111,7 +112,7 @@ def read_data(month, day):
     # print("--------------------------------------------------------")
     # print("weather:\n", weather, "\n")
     # print("Json:", json.dumps(weather, indent=4, sort_keys=True))
-    r = rain()
+    r = get_rain()
     for i in range(8):
         r.append('0')
     weather['rain'] = r

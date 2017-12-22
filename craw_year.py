@@ -1,6 +1,7 @@
-import rain_year
+import year_data
 
+# 抓年度氣象局資料
 year = 2017
 for i in range(year, (year - 7), -1):
-    rain_year.read_data(i)
+    year_data.get_data(i)
     print(i, "\n")
