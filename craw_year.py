@@ -6,10 +6,10 @@ import json
 year = 2017
 
 # 設定抓取多少年
-num = 2
+num = 8
 for i in range(year, (year - num), -1):
     year_data.get_data(i)
-    # print(i, "\n")
+    print(i)
 
 # 將起始日期json檔讀取當作基準
 path = "data2/" + str(year) + ".json"
@@ -30,6 +30,13 @@ for j in range((year - 1), (year - num), -1):
         # 合併list
         data[key].extend(data1[key])
 
+count = 0
+# 把數值為T的去掉
+for p in data["Precp"]:
+    if p == "T":
+        data["Precp"][count] = 0.1
+        # print(p)
+    count = count + 1
 # print(data)
 
 # 合併完所有年份資料後另存新檔

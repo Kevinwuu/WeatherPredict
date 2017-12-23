@@ -5,6 +5,7 @@ import re
 import os
 
 
+# y = 2017
 def get_data(y):
     url = 'http://e-service.cwb.gov.tw/HistoryDataQuery/YearDataController.do?command=viewMain&station=466900&stname=%25E6%25B7%25A1%25E6%25B0%25B4&datepicker='
 
@@ -27,7 +28,7 @@ def get_data(y):
 
     # 抓取所有標題
     titles = table.find('tr', 'second_tr').find_all('th')
-    # print(soup.find(id='MyTable'))
+
     title = []
     # print(len(titles))
     for i in range(len(titles)):
@@ -35,20 +36,28 @@ def get_data(y):
 
         # 正則表達式去除括號內文字(替換成空)
         result = re.sub(r'\([^)]*\)', '', result)
-
+        # result = re.sub(' ', '', result)
         # 去除中文
-        # result = re.findall('[a-zA-Z]+', result)
+        result = re.findall(r'[a-zA-Z0-9\s]+', result)
+
+        # 把空的key定做none
+        if result == []:
+            result.append("PrecpDayMaxTiime")
         # print(result)
+
         # 匹配完後會變成list
-        title.append(result)
-    # print(title)
+        if result[0] == "10" or result[0] == "A":
+            result = [result[1]]
+        # print(result)
+
+        title.append(result[0])
+    print(title)
 
     # 抓取特定欄位下每筆資料
     rows = table.find_all('tr')
     # print(rows)
     weather = {}
-    # print(type(rows))
-    # print(rows[1])
+
     # 依序讀取每一欄天氣因素的所有資料,去除前兩個
     for col in range(0, 31, 1):
         # 讀取每一行資料,去除最前面兩個奇怪字元
