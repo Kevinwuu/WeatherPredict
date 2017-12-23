@@ -33,6 +33,6 @@ for j in range((year - 1), (year - num), -1):
 # print(data)
 
 # 合併完所有年份資料後另存新檔
-addr = "data2/" + str(year) + "-" + str(num) + ".json"
+addr = "data2/" + str(year) + "(" + str(num) + ")" + ".json"
 f = open(addr, 'w')
 f.write(json.dumps(data, indent=4, ensure_ascii=False))
