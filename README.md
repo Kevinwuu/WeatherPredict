@@ -42,3 +42,7 @@ regression : 讀取資料畫出相關性，求regression方程式。
 
 [即時降雨機率](https://weather.com/zh-TW/weather/hourbyhour/l/TWXX0021:1:TW)
 
+[台灣氣象站位置分布圖](http://www.cwb.gov.tw/V7/google/gmap.php?id=46690)
+
+[下雨定義與降雨機率](http://www.metapp.org.tw/index.php/weatherknowledge/39-rainfall/56-2008-12-25-08-45-32)
+
