@@ -43,7 +43,7 @@ def dmerge():
     # 把數值為T的去掉
     for p in data["Precp"]:
         if p == "T":
-            data["Precp"][count] = 0.3
+            data["Precp"][count] = 0.1
             # print(p)
         count = count + 1
     # print(data["Precp"])
