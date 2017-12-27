@@ -1,4 +1,4 @@
-import year_data
+import month_data
 import json
 
 # 抓年度氣象局天氣資料
@@ -8,7 +8,7 @@ year = 2017
 # 設定抓取多少年
 num = 8
 for i in range(year, (year - num), -1):
-    year_data.get_data(i)
+    month_data.get_data(i)
     print(i)
 
 # 將起始日期json檔讀取當作基準

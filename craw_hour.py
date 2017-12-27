@@ -1,4 +1,4 @@
-import weather
+import hour_data
 import json
 
 # 設定從哪天開始
@@ -16,10 +16,10 @@ for i in range(today, (today - num), -1):
     if 0 <= i < 10:
         i = "0" + str(i)
     print(month, "/", i)
-    weather.get_data(month, i)
+    hour_data.get_data(month, i)
 
 
-def dmerge():
+def merge_y():
         # 將起始日期json檔讀取當作基準
     path = "data/" + "2017" + "-" + month + "-" + str(today) + ".json"
     json_data = open(path).read()
@@ -55,4 +55,4 @@ def dmerge():
     f.write(json.dumps(data, indent=4, ensure_ascii=False))
 
 
-dmerge()
+merge_y()
