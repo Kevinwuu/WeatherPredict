@@ -5,6 +5,7 @@ from sklearn.linear_model import LinearRegression
 
 # result = pd.read_json("data/2017-11-26(2).json")
 result = pd.read_json("data2/2017(8).json")
+# result = pd.read_json("data3/target.json")
 
 
 result.head()

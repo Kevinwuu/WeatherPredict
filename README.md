@@ -26,7 +26,7 @@ sklearn.linear_model
 ...
 
 ## 檔案
-craw_data : 爬取日報表資料。
+craw_data : 爬取日報表資料。 :+1:
 
 craw_rain : 爬取即時降雨機率。
 
@@ -43,11 +43,11 @@ regression : 讀取資料畫出相關性，求regression方程式。
 
 - [ ] 如何自動點擊，顯示隱藏的html
 
-- [ ] 年報表資料key值尚未去中文
+- [x] 年報表資料key值尚未去中文
 
-- [ ] 將日報表資料作合併。
+- [x] 將所有日報表資料作合併。
 
-- [ ] regression到底有沒有相關性@@
+- [x] regression到底有沒有相關性
 
 
 
