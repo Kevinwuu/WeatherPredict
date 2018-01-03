@@ -56,6 +56,8 @@ regression : 讀取資料畫出相關性，求regression方程式。
 
 [淡水測站日報表](http://e-service.cwb.gov.tw/HistoryDataQuery/DayDataController.do?command=viewMain&station=466900&stname=%25E6%25B7%25A1%25E6%25B0%25B4&datepicker=2017-12-05)
 
+[淡水測站月報表](http://e-service.cwb.gov.tw/HistoryDataQuery/MonthDataController.do?command=viewMain&station=466900&stname=%25E6%25B7%25A1%25E6%25B0%25B4&datepicker=2017-01)
+
 [淡水測站年報表](http://e-service.cwb.gov.tw/HistoryDataQuery/YearDataController.do?command=viewMain&station=466900&stname=%25E6%25B7%25A1%25E6%25B0%25B4&datepicker=2017)
 
 [即時降雨機率](https://weather.com/zh-TW/weather/hourbyhour/l/TWXX0021:1:TW)
