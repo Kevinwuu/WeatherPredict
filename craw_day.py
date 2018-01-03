@@ -1,8 +1,8 @@
 import day_data
 import json
 
-
-# for y in range(2008, 2017):
+# 爬training 資料
+# for y in range(2016, 2017):
 #     # 跑所有個月份
 #     for m in range(1, 13):
 #         if m < 10:
@@ -13,7 +13,7 @@ import json
 
 # 放置最終合併資料
 dataset = {}
-for y in range(2008, 2017):
+for y in range(2008, 2016):
     # 將每年一月的json檔讀取當作基準
     path = "data3/" + str(y) + "-01" + ".json"
     json_data = open(path).read()
@@ -59,7 +59,7 @@ for v in dataset.values():
         v[i] = '0'
         num2 = num2 - 1
 
-
+# print(dataset.keys())
 # print(len(dataset["Precp"]))
 
 # 合併完所有年份資料後另存新檔
