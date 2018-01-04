@@ -1,15 +1,15 @@
-import day_data
+import weather
 import json
 
 # 爬training 資料
-# for y in range(2016, 2017):
-#     # 跑所有個月份
-#     for m in range(1, 13):
-#         if m < 10:
-#             m = "0" + str(m)
-#             # print(m)
-#         day_data.get_data(y, m)
-#         print(y, "/", m)
+for y in range(2008, 2018):
+    # 跑所有個月份
+    for m in range(1, 13):
+        if m < 10:
+            m = "0" + str(m)
+            # print(m)
+        weather.get_data(y, m)
+        print(y, "/", m)
 
 # 放置最終合併資料
 dataset = {}
@@ -39,25 +39,6 @@ for y in range(2008, 2016):
         dataset.setdefault(key, []).extend(data[key])
 print(len(dataset["Precp"]))
 
-
-# 將數值T改為0.1,數值X改為0
-for v in dataset.values():
-    num = v.count('T')
-    while (num > 0):
-        i = v.index('T')
-        v[i] = '0.1'
-        num = num - 1
-
-    num1 = v.count('X')
-    while (num1 > 0):
-        i = v.index('X')
-        v[i] = '0'
-        num1 = num1 - 1
-    num2 = v.count('')
-    while (num2 > 0):
-        i = v.index('')
-        v[i] = '0'
-        num2 = num2 - 1
 
 # print(dataset.keys())
 # print(len(dataset["Precp"]))

@@ -9,7 +9,7 @@ from sklearn.preprocessing import StandardScaler
 
 # result = pd.read_json("data/2017-11-26(2).json")
 # result = pd.read_json("data2/2017(8).json")
-result = pd.read_json("data3/target.json")
+result = pd.read_json("data/01/target.json")
 test = pd.read_json("data3/2016-01.json")
 
 
@@ -17,11 +17,11 @@ test = pd.read_json("data3/2016-01.json")
 # print(type(f))
 
 result.head()
-# print(type(result)
+print(result)
 
 plt.close()
 
-fig, axs = plt.subplots(2, 4, sharey=True)
+fig, axs = plt.subplots(2, 3, sharey=True)
 # 溫度
 result.plot(kind='scatter', x='Temperature',
             y='Precp', ax=axs[0][0], figsize=(16, 8))
@@ -32,43 +32,31 @@ result.plot(kind='scatter', x='RH', y='Precp', ax=axs[0][1])
 # 海平面氣壓
 result.plot(kind='scatter', x='SeaPres', y='Precp', ax=axs[0][2])
 
-# 測站氣壓
-result.plot(kind='scatter', x='StnPres', y='Precp', ax=axs[0][3])
 
 # 露點溫度
-result.plot(kind='scatter', x='Td dew point', y='Precp', ax=axs[1][0])
+result.plot(kind='scatter', x='WS', y='Precp', ax=axs[1][0])
 
 # 日曬時間
 result.plot(kind='scatter', x='SunShine', y='Precp', ax=axs[1][1])
 
-result.plot(kind='scatter', x='T Min', y='Precp', ax=axs[1][2])
-
-result.plot(kind='scatter', x='T Max', y='Precp', ax=axs[1][3])
-
 # plt.show()
 
-feature_cols = ['Temperature', 'RH', 'SeaPres', 'StnPres',
-                'Td dew point', 'T Max']
-
-# std_dataset = {}
-# tem = []
-for key in feature_cols:
-    count = 0
-    for val in result[key]:
-        val = (val - result[key].mean()) / result[key].std()
-        result[key][count] = val
-        count = count + 1
-    print(result[key])
+feature_cols = ['Temperature', 'RH', 'SeaPres',
+                'WS', 'SunShine']
 
 
-# feature_cols = ['SeaPres', 'PrecpMax10', 'StnPres']
 X = result[feature_cols]
 y = result.Precp
-# X = std_dataset[feature_cols]
-# y = std_dataset.Precp
 
 lm = LinearRegression(normalize=True)
+
+# sc = StandardScaler()
+# sc.fit(X)
+# X_std = sc.transform(X)
+
+# lm.fit(X_std, y)
 lm.fit(X, y)
+
 print("Coefficient : ", lm.coef_)
 
 # x_test = test[feature_cols]
@@ -79,14 +67,8 @@ print("Coefficient : ", lm.coef_)
 # plt.ylabel('HR')
 # plt.show()
 
-
-# sc = StandardScaler()
-# sc.fit(X)
-# X_std = sc.transform(X)
-# lm.fit(X_std, y)
-
 # 印出截距
-print(lm.intercept_)
+print("Intercept:", lm.intercept_)
 print("RMSE : ", lm._residues)
 
 
