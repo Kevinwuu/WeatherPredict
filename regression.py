@@ -3,21 +3,22 @@ import matplotlib.pyplot as plt
 from sklearn.linear_model import LinearRegression
 from sklearn import metrics
 from sklearn.preprocessing import StandardScaler
+from sklearn.pipeline import Pipeline
+from sklearn.decomposition import PCA
+from sklearn.linear_model import LogisticRegression
+from sklearn import preprocessing
 
 # import json
 
 
-# result = pd.read_json("data/2017-11-26(2).json")
+# result = pd.read_json("all_data/2008-01.json")
 # result = pd.read_json("data2/2017(8).json")
-result = pd.read_json("data/01/target.json")
-test = pd.read_json("data3/2016-01.json")
+result = pd.read_json("data/08/target.json")
+test = pd.read_json("all_data/2017-01.json")
 
-
-# f = open("data3/target.json", 'w').read()
-# print(type(f))
 
 result.head()
-print(result)
+# print(result)
 
 plt.close()
 
@@ -39,58 +40,60 @@ result.plot(kind='scatter', x='WS', y='Precp', ax=axs[1][0])
 # 日曬時間
 result.plot(kind='scatter', x='SunShine', y='Precp', ax=axs[1][1])
 
-# plt.show()
+plt.show()
 
 feature_cols = ['Temperature', 'RH', 'SeaPres',
                 'WS', 'SunShine']
 
 
-X = result[feature_cols]
-y = result.Precp
+x_train = result[feature_cols]
+y_train = result.Precp
+x_test = test[feature_cols]
 
 lm = LinearRegression(normalize=True)
 
-# sc = StandardScaler()
-# sc.fit(X)
-# X_std = sc.transform(X)
+# 標準化
+sc = StandardScaler()
+x_train_std = sc.fit_transform(x_train)
+x_test_std = sc.transform(x_test)
 
 # lm.fit(X_std, y)
-lm.fit(X, y)
+lm.fit(x_train, y_train)
+
+# # 主成分分析PCA
+# pca = PCA(n_components=2)
+# x_train_pca = pca.fit_transform(x_train_std)
+# x_test_pca = pca.transform(x_test_std)
+
+# lab_enc = preprocessing.LabelEncoder()
+# trainingScores = y_train
+# encoded = lab_enc.fit_transform(trainingScores)
+
+# # 邏輯斯蒂迴歸預測
+# lr = LogisticRegression(random_state=1)
+# lr.fit(x_train_pca, y_train)
+# y_pred = lr.predict(x_test_pca)
 
 print("Coefficient : ", lm.coef_)
 
-# x_test = test[feature_cols]
-# y_test = test.Precp
-# plt.scatter(x_test, y_test, color='blue', marker='x')
-# plt.plot(x_test, lm.predict(x_test), color='green')
-# plt.xlabel('R')
-# plt.ylabel('HR')
-# plt.show()
+
+
+# 誤差值
+# r_squared = lm.score(X, y)
+# adj_r_squared = r_squared - (1 - r_squared) * \
+#     (X.shape[1] / (X.shape[0] - X.shape[1] - 1))
 
 # 印出截距
 print("Intercept:", lm.intercept_)
 print("RMSE : ", lm._residues)
+# print("R^2:", r_squared)
+# print("adj_r_square:", adj_r_squared)
 
+# pipe_lr = Pipeline([('sc', StandardScaler()), ('pca', PCA(n_components=2)), ('lr', LogisticRegression(random_state=1))])
+# pipe_lr.fit(X_train, y_train)
+# pipe_lr.score(X_test, y_test)
 
-r_squared = lm.score(X, y)
-adj_r_squared = r_squared - (1 - r_squared) * \
-    (X.shape[1] / (X.shape[0] - X.shape[1] - 1))
+a = result[result.Precp == 0.0].index.tolist()
+# print(result["Precp"].index('0'))
+print(len(a))
 
-print("R^2:", r_squared)
-print("adj_r_square:", adj_r_squared)
-
-# print(result[feature_cols[1]])
-
-# for i in range(7):
-#     lm1 = LinearRegression()
-#     lm1.fit(result[feature_cols[i]], y)
-#     print(lm1.score(result[feature_cols[i]], y))
-
-
-# print(lm.score(result['Temperature'], y))
-
-# test_cols = ['Temperature', 'RH', 'SeaPres', 'StnPres',
-#                 'Td dew point', 'SunShine', 'T Min', 'T Max']
-
-# train = lm.predict(test[test_cols])
-# print(train)

@@ -23,19 +23,23 @@ my_path = "data"
 
 for root, dirs, files in os.walk(my_path):
     dataset = {}
-
-    for f in files:
-        if root != "data":
+    Flag = 0
+    if root != "data":
+        # 依序跑資料夾
+        for f in files:
+            if f == "target.json":
+                break
             full_path = os.path.join(root, f)
             print(full_path)
             json_data = open(full_path).read()
             data = json.loads(json_data)
             for key in data.keys():
                 dataset.setdefault(key, []).extend(data[key])
+            Flag = 1
+        # 合併完整個資料夾再存檔
+        if(Flag):
+            f = open(root + "\\" + "target.json", 'w')
+            f.write(json.dumps(dataset, indent=4, ensure_ascii=False))
 
-    # print(len(dataset["Precp"]))
-    # print(dataset["Precp"])
-
-    # 合併完再存檔
-    f = open(root + "\\" + "target.json", 'w')
-    f.write(json.dumps(dataset, indent=4, ensure_ascii=False))
+# print(len(dataset["Precp"]))
+# print(dataset["Precp"])
